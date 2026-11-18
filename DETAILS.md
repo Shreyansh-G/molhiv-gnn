@@ -240,6 +240,16 @@ correlation and top-100 overlap. *Point to make:* if the models agreed, the red
 dots would lie on the diagonal; they scatter, yet the counting (section 8) shows
 they still recover largely the same actives.
 
+**`fig7_calibration.png` — ranking well vs being honest.**
+Left: reliability curves (8 quantile bins) — what the model claimed against what
+actually happened, with the diagonal marking perfect honesty. Right: Brier
+scores against the do-nothing baseline of always predicting the 3.16% base rate.
+*Points to make:* all three models sit well below the diagonal, so all three are
+overconfident — at a claimed 0.45 only about 0.14 are genuinely active. And
+WEGL, which ranks respectably, scores **worse than the constant baseline**,
+because a good ranking and a calibrated probability are different achievements.
+Brier rewards the second and the leaderboard measures neither.
+
 **`fig5_posweight.png` — validation up, test down.**
 Two lines, validation and test ROC-AUC, between the unweighted run and
 `--pos-weight 10`. *Point to make:* they move in opposite directions, so

@@ -375,6 +375,68 @@ def fig_metric_choice(data, out, n_boot):
     plt.close(fig)
 
 
+def fig_calibration(data, out, n_bins=8):
+    """Ranking well and being honest about confidence are different skills.
+
+    A reliability curve: group molecules by what the model claimed, and plot
+    that against what actually happened. On the diagonal means "when it says
+    20%, 20% of them really are active".
+    """
+    from sklearn.calibration import calibration_curve
+    from sklearn.metrics import brier_score_loss
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.3),
+                                   gridspec_kw={"width_ratios": [1.25, 1]})
+    base = data["fp"][0][0].mean()
+    for key, label, _ in ARMS:
+        y, p = data[key][0]
+        frac, mean_p = calibration_curve(y, p, n_bins=n_bins, strategy="quantile")
+        br = np.mean([brier_score_loss(*data[key][s]) for s in sorted(data[key])])
+        ax1.plot(mean_p, frac, color=ARM_COLOR[key], lw=2, marker="o", ms=7,
+                 label=f"{label}  (Brier {br:.4f})")
+    lim = 0.62
+    ax1.plot([0, lim], [0, lim], color=MUTED, lw=1.2, ls=(0, (4, 3)))
+    ax1.text(lim * 0.62, lim * 0.70, "perfectly honest", color=INK_2,
+             fontsize=8.5, rotation=34)
+    ax1.set_xlim(-0.02, lim); ax1.set_ylim(-0.02, lim)
+    ax1.set_xlabel("what the model claimed")
+    ax1.set_ylabel("what actually happened")
+    ax1.set_title("Reliability (seed 0)", loc="left")
+    ax1.legend(fontsize=8.5, loc="upper left")
+
+    # Brier against the do-nothing baselines
+    names, vals, cols = [], [], []
+    for key, label, _ in ARMS:
+        names.append(label.replace(" + ", "\n+ "))
+        vals.append(np.mean([brier_score_loss(*data[key][s])
+                             for s in sorted(data[key])]))
+        cols.append(ARM_COLOR[key])
+    const = float(np.mean((data["fp"][0][0] - base) ** 2))
+    names.append("always guess\nthe base rate")
+    vals.append(const)
+    cols.append(AXIS)
+    xs = np.arange(len(names))
+    ax2.bar(xs, vals, color=cols, width=0.62, edgecolor=SURFACE, linewidth=2)
+    for x, v in zip(xs, vals):
+        ax2.annotate(f"{v:.4f}", (x, v), textcoords="offset points",
+                     xytext=(0, 5), ha="center", fontsize=9, color=INK_2)
+    ax2.axhline(const, color=MUTED, lw=1.2, ls=(0, (4, 3)))
+    ax2.set_xticks(xs)
+    ax2.set_xticklabels(names, fontsize=8.5)
+    ax2.set_ylabel("Brier score  (lower is better)")
+    ax2.set_title("Anything above the dashed line is worse\nthan not trying",
+                  loc="left")
+    ax2.grid(axis="x", visible=False)
+
+    fig.text(0.012, 0.015,
+             "WEGL ranks molecules well and still scores worse than guessing the "
+             "base rate: a good ranking and an honest probability are not the "
+             "same achievement.", color=INK_2, fontsize=9)
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
+    fig.savefig(os.path.join(out, "fig7_calibration.png"))
+    plt.close(fig)
+
+
 def fig_posweight(data, out, results):
     """Validation went up, test went down."""
     pw = os.path.join(os.path.dirname(results.rstrip("/\\")), "results_posweight",
@@ -442,6 +504,7 @@ def main():
     fig_agreement(data, out);                  print("  fig4_agreement.png")
     fig_posweight(data, out, args.results);    print("  fig5_posweight.png")
     fig_metric_choice(data, out, args.n_boot); print("  fig6_metric_choice.png")
+    fig_calibration(data, out);                print("  fig7_calibration.png")
     print(f"\nwrote figures to {out}")
 
 
