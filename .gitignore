@@ -17,5 +17,6 @@ dataset/*/processed/
 *.pkl
 *.pt
 
-# Personal rehearsal notes, not part of the project's documentation.
+# Personal study and rehearsal notes, not part of the project's documentation.
 TALKING_POINTS.md
+LEARN.md
