@@ -1,10 +1,10 @@
-# Roadmap
+﻿# Roadmap
 
 The question this project answers:
 
 > On scaffold-split molhiv, does learned message passing actually beat
 > non-learned graph embeddings and plain substructure counting - by more than
-> the run-to-run noise?
+> the run-to-run variation?
 
 Three arms, one split, same evaluator. Any outcome is a result: if the GNN wins
 clearly, that is a finding; if the confidence intervals overlap, that is a more
@@ -38,7 +38,7 @@ hardware (CPU vs GPU).
 
 For every arm: mean +/- std ROC-AUC over 3 seeds, a bootstrap 95% CI on the test
 molecules, and wall-clock training time. The timing matters: if WEGL lands within
-noise of PNA at a fraction of the cost, that is the headline.
+touching distance of PNA at a fraction of the cost, that is the headline.
 
 ## If something breaks
 
