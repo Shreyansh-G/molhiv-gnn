@@ -1,0 +1,6 @@
+﻿7 of 41127 SMILES unparseable -> dropped 3 from train (32898 left), kept all 4113 test molecules (2 with an all-zero fingerprint)
+seed 0: Morgan+RF test ROC-AUC 0.8044 (95% CI 0.7621-0.8471)
+seed 1: Morgan+RF test ROC-AUC 0.8052 (95% CI 0.7649-0.8496)
+seed 2: Morgan+RF test ROC-AUC 0.8111 (95% CI 0.7699-0.8543)
+
+Morgan+RF over 3 seeds: 0.8069 +/- 0.0030

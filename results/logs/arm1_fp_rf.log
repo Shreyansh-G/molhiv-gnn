@@ -1,0 +1,11 @@
+/usr/local/lib/python3.13/dist-packages/outdated/__init__.py:36: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import parse_version
+/usr/local/lib/python3.13/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+using 6 of 12 cores
+7 of 41127 SMILES unparseable -> dropped 3 from train (32898 left), kept all 4113 test molecules (2 with an all-zero fingerprint)
+seed 0: Morgan+RF test ROC-AUC 0.7978 (95% CI 0.7530-0.8428)
+seed 1: Morgan+RF test ROC-AUC 0.7967 (95% CI 0.7534-0.8441)
+seed 2: Morgan+RF test ROC-AUC 0.8008 (95% CI 0.7564-0.8455)
+
+Morgan+RF over 3 seeds: 0.7984 +/- 0.0017

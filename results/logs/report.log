@@ -1,0 +1,14 @@
+/usr/local/lib/python3.13/dist-packages/outdated/__init__.py:36: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import parse_version
+/usr/local/lib/python3.13/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+model                  seeds   ROC-AUC     std   95% CI (seed 0)      per-seed
+Morgan FP + RF             3    0.7984  0.0017   [0.7530, 0.8428]   0.7978 0.7967 0.8008
+WEGL + classifier          3    0.7749  0.0047   [0.7308, 0.8227]   0.7801 0.7686 0.7758
+PNA (trained GNN)          3    0.7722  0.0113   [0.7329, 0.8295]   0.7826 0.7565 0.7776
+
+test set actually scored (must be identical across arms):
+  Morgan FP + RF         n=4113   positives=130
+  WEGL + classifier      n=4113   positives=130
+  PNA (trained GNN)      n=4113   positives=130
+  all arms scored on the same test molecules.

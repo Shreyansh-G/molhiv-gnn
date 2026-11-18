@@ -1,0 +1,12 @@
+/usr/local/lib/python3.13/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/molhiv-gnn/src/error_analysis.py", line 70, in <module>
+    main()
+    ~~~~^^
+  File "/content/molhiv-gnn/src/error_analysis.py", line 59, in main
+    f.write(img.data if hasattr(img, "data") else img)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: a bytes-like object is required, not 'PngImageFile'

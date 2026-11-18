@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Regenerable dataset cache (~160 MB). raw/, split/ and mapping/ ARE tracked:
+# with those present, ogb rebuilds processed/ offline in about 10 seconds, so a
+# clone never needs the network to get the data.
+dataset/*/processed/
+
+# Large regenerable binaries, in results/ and every variant of it:
+#   *.pkl  WEGL embedding caches, ~150 MB per seed, ~2 min to rebuild
+#   *.pt   trained PNA checkpoints, ~2.8 MB each
+# The .npz predictions ARE tracked - every table and figure in the README is
+# rebuilt from those alone, with no retraining.
+*.pkl
+*.pt
+
+# Personal rehearsal notes, not part of the project's documentation.
+TALKING_POINTS.md

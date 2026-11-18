@@ -1,0 +1,21 @@
+﻿python.exe : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:5 char:1
++ & $py -u -m src.run_wegl --seeds 0 1 2 --classifier rf --no-cache --n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+I0000 00:00:1795035591.843344    4340 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795035600.706355    4340 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+using 6 of 12 cores (OMP_NUM_THREADS=unset)
+embedding dim: 960  (train 32901, valid 4113, test 4113)
+seed 0: WEGL+rf test ROC-AUC 0.7867 (95% CI 0.7388-0.8301)  {'n_estimators': 500}
+seed 1: WEGL+rf test ROC-AUC 0.7902 (95% CI 0.7395-0.8370)  {'n_estimators': 500}
+seed 2: WEGL+rf test ROC-AUC 0.7996 (95% CI 0.7516-0.8430)  {'n_estimators': 500}
+
+WEGL+rf over 3 seeds: 0.7922 +/- 0.0054
